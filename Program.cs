@@ -4,6 +4,7 @@ public class start
 {
     public static void Main(string[] args)
     {
+
         //// Day 6
         ///my name : Abdullah Adel Eid Sharaawy
         //int number;
@@ -91,6 +92,14 @@ public class start
         //Day7.PrintMulti();
         // Day7.ReadData();
         //
-        Day7.ArrayDegree();
+        //Day7.ArrayDegree();
+        int size = 0;
+        do
+        {
+            Console.Write("Please enter the capacity: ");
+
+        } while (!int.TryParse(Console.ReadLine(),out size) || size <= 0);
+        Day8.System system = new Day8.System(10);
+        system.Run();
     }
 }

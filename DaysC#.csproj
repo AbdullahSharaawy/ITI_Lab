@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ُEmployee.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Day6.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
