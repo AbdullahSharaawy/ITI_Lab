@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using DaysCsharp.Day9;
+using System.Text;
 
 public class start
 {
@@ -93,13 +94,7 @@ public class start
         // Day7.ReadData();
         //
         //Day7.ArrayDegree();
-        int size = 0;
-        do
-        {
-            Console.Write("Please enter the capacity: ");
-
-        } while (!int.TryParse(Console.ReadLine(),out size) || size <= 0);
-        Day8.System system = new Day8.System(10);
-        system.Run();
-    }
+       StartProgram startProgram = new StartProgram();
+		startProgram.Run();
+	}
 }

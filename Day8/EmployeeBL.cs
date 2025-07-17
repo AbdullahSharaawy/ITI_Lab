@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Day9;
+using DaysCsharp;
+using DaysCsharp.Day9;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,68 +10,65 @@ using System.Xml.Linq;
 
 namespace Day8
 {
-    public class System
+    public class EmployeeBL
     {
         Employee[] employees;
-        int Count = 0;
-        public System(int Size)
+        public int Count
+		{
+			get
+			{
+				return Employee.ECounter;
+			}
+		}
+		public EmployeeBL(int Size)
         {
             employees = new Employee[Size];
         }
-        private string ReadName()
+        
+        private void AddEmployee()
         {
-            string Name;
-            do
-            {
-                Console.Write("Please Enter Employee Name: ");
-                Name = Console.ReadLine();
-
-            } while (string.IsNullOrEmpty(Name));
-            return Name;
-        }
-        private decimal ReadSalary()
-        {
-            decimal Salary;
-            do
-            {
-                Console.Write("Please Enter Employee Salary: ");
-
-            } while (!decimal.TryParse(Console.ReadLine(), out Salary));
-            return Salary;
-        }
-        private DateTime ReadDate()
-        {
-            DateTime DB;
-            do
-            {
-                Console.Write("Please Enter Date Of Birth dd-mm-yyyy: ");
-
-            } while (!DateTime.TryParse(Console.ReadLine(), out DB));
-            return DB;
-        }
-        public void AddEmployee()
-        {
-            Count++;
+            
             string Name;
             decimal Salary;
             DateTime DB;
-            Name = ReadName();
-            Salary = ReadSalary();
-            DB= ReadDate();
-            employees[Employee.Counter]=new Employee(Employee.Counter++,Name, Salary, DB);
+            int DeptID,WorksOnID;
+            Name = ReadMethods.ReadString("Please Enter Employee Name: ");
+            Salary = ReadMethods.ReadDecimal("Please Enter Employee Salary: ");
+            DB= ReadMethods.ReadDate("Please Enter Date of Birth dd-mm-yyyy: ");
+			DeptID = ReadMethods.Readint("Please Enter Department ID: ");
+			while (DeptID > Department.DCounter) 
+			{
+                Console.WriteLine();
+                DeptID = ReadMethods.Readint("Please Enter a valid Department ID: ");
+            } 
+
+
+			employees[Employee.ECounter++]=new Employee(Name, Salary, DB,DeptID);
         }
-        public void GetAllEmployee()
+        private void GetAllEmployee()
         {
             
             Console.WriteLine("list of Employees: ");
             Console.WriteLine();
             for (int i=0;i<Count;i++)
             {
-                Console.WriteLine($"ID: {employees[i].ID} , Name: {employees[i].Name} , Salary: {employees[i].Salary} , Date Of Birth: {employees[i].DB}");
+                Console.WriteLine($"ID: {employees[i].ID} , Name: {employees[i].Name} , Salary: {employees[i].Salary} , Date Of Birth: {employees[i].DB} ");
             }
             Console.WriteLine();
+
         }
-        public void ShowEmployeeByID(int ID)
+		public void AssignProject(WorksOn W)
+		{
+			for (int i = 0; i < employees.Count(); i++)
+			{
+				if (W.EmployeeID == employees[i].ID)
+				{
+					employees[i].WorksOn.Add(W); // Add employee to the department's employee list
+					return; // Exit after assigning the employee
+				}
+			}
+		}
+		private void ShowEmployeeByID(int ID)
         {
             
             for (int i = 0; i < Count; i++) 
@@ -77,11 +77,16 @@ namespace Day8
                 {
                     Console.WriteLine($"ID: {employees[i].ID} , Name: {employees[i].Name} , Salary: {employees[i].Salary} , Date Of Birth: {employees[i].DB}");
                     Console.WriteLine();
-                    break;
+					Console.WriteLine("this Emplyee is assigned to these Projects: ");
+					foreach (var item in employees[i].WorksOn)
+					{
+						Console.WriteLine($"-Project ID: {item.ProjectID} ");
+					}
+					break;
                 }
             }
         }
-        private Employee GetEmployeeByID(int ID)
+        public Employee GetEmployeeByID(int ID)
         {
             for (int i = 0; i < Count; i++)
             {
@@ -111,20 +116,20 @@ namespace Day8
                             
                             case 1:
                         {
-                            string Name = ReadName();
+                            string Name = ReadMethods.ReadString("Please Enter Employee Name: "); ;
                             employee.Name = Name;
                             break;
                         }
                             case 2:
                         {
-                            decimal Salary = ReadSalary();
-                            employee.Salary=Salary;
+                            decimal Salary = ReadMethods.ReadDecimal("Please Enter Employee Salary: ");
+							employee.Salary=Salary;
                             break;
                         }
                             case 3:
                         {
-                            DateTime DB = ReadDate();
-                            employee.DB = DB;
+                            DateTime DB = ReadMethods.ReadDate("Please Enter Date of Birth dd-mm-yyyy: ");
+							employee.DB = DB;
                             break;
                         }
 
@@ -142,7 +147,7 @@ namespace Day8
             Console.WriteLine("2-Get All Employee");
             Console.WriteLine("3-Show Employee By ID");
             Console.WriteLine("4-Update Employee");
-            Console.WriteLine("4-Exist");
+            Console.WriteLine("5-Exist");
         }
         private int ReadID() 
         {
