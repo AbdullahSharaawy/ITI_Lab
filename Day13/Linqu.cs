@@ -202,5 +202,27 @@ namespace DaysCsharp.Day13
 			insertionSortDesc<T>(ref source); 
 			return source;
 		}
+		public static T First<T>(this List<T> source) 
+		{
+			
+			return source[0]; 
+		}
+		public static T Last<T>(this List<T> source)
+		{
+
+			return source[source.Count()];
+		}
+		public static T LastOrDefault<T>(this List<T> source)
+		{
+			if (source == null || source.Count == 0)
+				return default(T);
+			return source[source.Count()];
+		}
+		public static T FirstOrDefault<T>(this List<T> source)
+		{
+			if (source == null || source.Count == 0)
+				return default(T);
+			return source[0];
+		}
 	}
 }
