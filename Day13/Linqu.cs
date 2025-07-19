@@ -75,5 +75,28 @@ namespace DaysCsharp.Day13
 			return result;
 
 		}
+		public static List<T> TakeLast<T>(this List<T> source, int NumElements)
+		{
+			List<T> result = new List<T>();
+			for (int i = source.Count()-1; i >= 0 && NumElements>0; i--)
+			{
+
+				result.Add(source[i]);
+				NumElements--;
+			}
+			return result;
+		}
+		public static List<T> SkipLast<T>(this List<T> source, int NumElements)
+		{
+			List<T> result = new List<T>();
+			for (int i = source.Count()-NumElements-1; i >= 0 ; i--)
+			{
+
+				result.Add(source[i]);
+				
+			}
+			return result;
+		}
+
 	}
 }

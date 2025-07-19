@@ -1,4 +1,5 @@
-﻿using DaysCsharp.Day9;
+﻿using DaysCsharp.Day13;
+using DaysCsharp.Day9;
 using System.Text;
 
 public class start
@@ -94,7 +95,11 @@ public class start
         // Day7.ReadData();
         //
         //Day7.ArrayDegree();
-       StartProgram startProgram = new StartProgram();
-		startProgram.Run();
+  //     StartProgram startProgram = new StartProgram();
+		//startProgram.Run();
+        List<int> list = new List<int> { 1,2,3,4,5,6,7,8,9,10};
+        var r=list.Where((a,i)=>a%2==0 && i!=1).ToList().TakeLast(2);
+        foreach(int i in r)
+            Console.WriteLine(i);
 	}
 }
