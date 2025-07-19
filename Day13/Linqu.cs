@@ -1,0 +1,79 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DaysCsharp.Day13
+{
+	public static class Linqu 
+	{
+		public static List<T> Where<T>(this List<T> source, Func<T, bool> predicate)
+		{
+			List<T> result = new List<T>();
+			foreach (var item in source)
+			{
+				if (predicate(item))
+				{
+					result.Add(item);
+				}
+			}
+			return result;
+		}
+		public static List<T> Where<T>(this List<T> source, Func<T,int, bool> predicate)
+		{
+			List<T> result = new List<T>();
+			for (int i=0;i<source.Count();i++)
+			{
+				if (predicate(source[i],i))
+				{
+					result.Add(source[i]);
+				}
+			}
+			return result;
+		}
+		public static List<T> Select<T>(this List<T> source,Func<T,T> prdicate)
+		{
+			List<T> result=new List<T>();
+			foreach (var item in source) 
+			{
+			    result.Add(prdicate(item));
+			}
+			return result;
+		}
+		public static List<T> Select<T>(this List<T> source,Func<T,int,T> prdicate)
+		{
+			List<T> result = new List<T>();
+			for (int i = 0; i < source.Count(); i++)
+			{
+				
+					result.Add(prdicate(source[i], i));
+				
+			}
+			return result;
+		}
+		public static List<T> Take<T>(this List<T> source,int NumElements) {
+			List<T> result = new List<T>();
+			for (int i = 0; i < NumElements; i++)
+			{
+
+				result.Add(source[i]);
+
+			}
+			return result;
+
+		}
+		public static List<T> Skip<T>(this List<T> source, int NumElements)
+		{
+			List<T> result = new List<T>();
+			for (int i = NumElements; i < source.Count(); i++)
+			{
+
+				result.Add(source[i]);
+
+			}
+			return result;
+
+		}
+	}
+}
