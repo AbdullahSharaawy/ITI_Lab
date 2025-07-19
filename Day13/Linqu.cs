@@ -153,6 +153,54 @@ namespace DaysCsharp.Day13
 			}
 			return result;
 		}
+		public static void insertionSortAsc<T>(ref List<T> source)
+		{
+			for (int i = 0; i < source.Count() - 1; i++)
+			{
+				for (int j = i + 1; j > 0; j--)
+				{
 
+					if ((dynamic)source[j] < (dynamic)source[j - 1])
+					{
+						T tmep = source[j];
+						source[j] = source[j - 1];
+						source[j - 1] = tmep;
+						
+					}
+					else break;
+				}
+			}
+			
+		}
+		public static void insertionSortDesc<T>(ref List<T> source)
+		{
+			for (int i = 0; i < source.Count() - 1; i++)
+			{
+				for (int j = i + 1; j > 0; j--)
+				{
+
+					if ((dynamic)source[j] > (dynamic)source[j - 1])
+					{
+						T tmep = source[j];
+						source[j] = source[j - 1];
+						source[j - 1] = tmep;
+
+					}
+					else break;
+				}
+			}
+
+		}
+		public static List<T> OrderBy<T>(this List<T>source)
+		{
+			insertionSortAsc<T>(ref source);
+			return source;
+			
+		}
+		public static List<T> OrderByDesc<T>(this List<T> source)
+		{
+			insertionSortDesc<T>(ref source); 
+			return source;
+		}
 	}
 }
